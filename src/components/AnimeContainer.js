@@ -15,7 +15,6 @@ const AnimeContainer = () => {
         return (
           <AnimeCard
             title={anime.title}
-            rank={anime.rank}
             id={anime.mal_id}
             img_url={anime.image_url}
           ></AnimeCard>

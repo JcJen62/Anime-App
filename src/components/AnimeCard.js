@@ -7,9 +7,10 @@ const AnimeCard = (props) => {
     return (<Grid className="itemFlex" item xs={4} key={id}>
         <img src={img_url} alt="Anime Poster" />
         <div className="infoFlex">
-            <Typography>{title}</Typography>
+            <Typography variant="h6">{title}</Typography>
             <Button sx={{
-                color: "black"
+                color: "black",
+                marginBottom: 3
             }}
             >Learn More</Button>
         </div>
