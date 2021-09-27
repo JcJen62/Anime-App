@@ -14,6 +14,7 @@ const AnimeContainer = () => {
       {anime.map((anime) => {
         return (
           <AnimeCard
+            key={anime.mal_id}
             title={anime.title}
             id={anime.mal_id}
             img_url={anime.image_url}
