@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => createStyles({
           '-moz-box-shadow': '0 0 10px black',
           '-webkit-box-shadow': '0 0 10px black',
           'box-shadow': '0 0 10px black'
-        }
+        },
     },
     itemFlex: {
       display: 'flex',
@@ -30,6 +30,9 @@ const useStyles = makeStyles(() => createStyles({
     infoFlex: {
       display: 'flex',
       flexDirection: 'column'
+    },
+    buttonStuff: {
+      marginBotton: 3
     }
   }
 }));

@@ -1,8 +1,17 @@
 import { anime } from "../data/anime";
 import AnimeCard from "./AnimeCard";
+import { useState } from "react";
 import { Grid } from "@material-ui/core";
+import AnimeDetailsModal from "./AnimeDetails";
+
 
 const AnimeContainer = () => {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => setOpen(false)
+
   return (
     <Grid
       container
@@ -15,12 +24,15 @@ const AnimeContainer = () => {
         return (
           <AnimeCard
             key={anime.mal_id}
-            title={anime.title}
-            id={anime.mal_id}
-            img_url={anime.image_url}
+            anime={anime}
+            handleOpen={handleOpen}
           ></AnimeCard>
         );
       })}
+      <AnimeDetailsModal
+        open={open}
+        onClose={handleClose}
+      />
     </Grid>
   );
 };

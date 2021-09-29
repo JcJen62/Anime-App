@@ -1,18 +1,36 @@
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import {useState} from "react"
 import { Grid, Typography } from "@material-ui/core"
 import Button from '@mui/material/Button';
 
 const AnimeCard = (props) => {
-    const {title, img_url, id} = props
+    const [added, setAdded] = useState(false)
+    const {anime, handleOpen} = props
 
-    return (<Grid className="itemFlex" item xs={4} key={id}>
-        <img src={img_url} alt="Anime Poster" />
-        <div className="infoFlex">
-            <Typography variant="h6">{title}</Typography>
-            <Button sx={{
-                color: "black",
-                marginBottom: 3
-            }}
-            >Learn More</Button>
+    const handleFave = (bool) => {
+        setAdded(bool)
+    }
+
+    return (<Grid className="itemFlex" item xs={4} key={anime.mal_id}>
+        <img src={anime.image_url} alt="Anime Poster" />
+        <div className="buttonStuff">
+            <Typography variant="h6">{anime.title}</Typography>
+            <div className="itemFlex">
+                <Button onClick={() => handleFave(!added)}>
+                {added ? <PlaylistAddCheckIcon sx={{
+                    fontSize: 36,
+                    color: "black",
+                    }} />: <PlaylistAddIcon sx={{
+                        fontSize: 36,
+                        color: "black",
+                    }} />}</Button>
+                <Button onClick={handleOpen} sx={{
+                    color: "black",
+                    border: "1px solid black"
+                }}
+                >Learn More</Button>
+            </div>
         </div>
     </Grid>
     )
