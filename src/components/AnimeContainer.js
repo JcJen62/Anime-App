@@ -1,11 +1,12 @@
-import { anime } from "../data/anime";
 import AnimeCard from "./AnimeCard";
 import { useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import AnimeDetailsModal from "./AnimeDetails";
+import {useAnimeContext} from '../context/AnimeContext'
 
 
 const AnimeContainer = () => {
+  const context = useAnimeContext()
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -20,7 +21,7 @@ const AnimeContainer = () => {
         flexWrap: "wrap",
       }}
     >
-      {anime.map((anime) => {
+      {context.anime.map((anime) => {
         return (
           <AnimeCard
             key={anime.mal_id}

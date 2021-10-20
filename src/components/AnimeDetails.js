@@ -1,5 +1,5 @@
 import Modal from '@mui/material/Modal';
-import { Typography, Box, Button } from "@material-ui/core";
+import { Typography, Box, Button } from "@mui/material";
 
 const styles = {
     position: 'absolute',

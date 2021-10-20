@@ -1,8 +1,9 @@
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import {useState} from "react"
-import { Grid, Typography } from "@material-ui/core"
-import Button from '@mui/material/Button';
+import { Typography } from "@mui/material"
+import { Grid } from "@mui/material"
+import { Button } from '@mui/material';
 
 const AnimeCard = (props) => {
     const [added, setAdded] = useState(false)

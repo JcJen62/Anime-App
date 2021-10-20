@@ -1,12 +1,15 @@
-import './App.css';
-import AnimeContainer from './components/AnimeContainer';
-import GlobalStyles from './components/GlobalStyles';
+import "./App.css";
+import {AnimeContextProvider} from "./context/AnimeContext";
+import AnimeContainer from "./components/AnimeContainer";
+import GlobalStyles from "./components/GlobalStyles";
 
 function App() {
   GlobalStyles();
   return (
     <div className="App">
-      <AnimeContainer></AnimeContainer>
+      <AnimeContextProvider>
+        <AnimeContainer />
+      </AnimeContextProvider>
     </div>
   );
 }
