@@ -9,7 +9,7 @@ import React, { useContext, useState } from "react";
 
 const AnimeContainer = () => {
   const user = useContext(UserContext);
-  const [redirect, setredirect] = useState(null);
+  const [redirect] = useState(null);
   const context = useAnimeContext()
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
