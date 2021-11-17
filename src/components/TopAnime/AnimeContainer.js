@@ -1,17 +1,25 @@
 import AnimeCard from "./AnimeCard";
-import { useState } from "react";
 import { Grid } from "@mui/material";
-import AnimeDetailsModal from "./AnimeDetails";
-import {useAnimeContext} from '../context/AnimeContext'
+import AnimeDetailsModal from "../Details/AnimeDetails";
+import {useAnimeContext} from '../../context/AnimeContext'
+import { UserContext } from  "../../context/UserProvider";
+import { Navigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
 
 
 const AnimeContainer = () => {
+  const user = useContext(UserContext);
+  const [redirect, setredirect] = useState(null);
   const context = useAnimeContext()
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
   }
   const handleClose = () => setOpen(false)
+  
+  if (redirect) {
+    return <Navigate to={'/Login'} />;
+  }
 
   return (
     <Grid
