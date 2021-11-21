@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 
 const MangaCard = (props) => {
     const [added, setAdded] = useState(false)
-    const {anime, handleOpen} = props
+    const {anime} = props
 
     const handleFave = (bool) => {
         setAdded(bool)

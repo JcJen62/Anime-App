@@ -4,28 +4,38 @@ import AnimeContainer from "./components/TopAnime/AnimeContainer";
 import MangaContainer from "./components/TopManga/MangaContainer"
 import GlobalStyles from "./components/GlobalStyles";
 import Navigation from "./components/Navigation";
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import UserProvider from "./context/UserProvider";
-import Login from "./components/Login/Login";
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Login } from './components/Login/Login'
+import { IdentityContextProvider } from 'react-netlify-identity';
 
 function App() {
   GlobalStyles();
+  const url = 'https://dgm3790.jeremyjensen.net/'
   return (
     <div className="App">
-      <UserProvider>
+      <IdentityContextProvider url={url}>
       <AnimeContextProvider>
-        <BrowserRouter>
+
         <Navigation />
-        <Routes>
-        <Route path="/" exact component={Login}/>
-        <Route path="/TopAnime" exact component={AnimeContainer}/>
-        <Route path="/TopManga" exact component={MangaContainer}/>
-        <Route path="/Login" exact component={Login}/>
-        <Route path="/DetailsPage" exact component={Login}/>
-        </Routes>
+        <BrowserRouter>
+        <Switch>
+        <Route path="/">
+          <Login />
+        </Route>
+        <Route path="/TopAnime" exact>
+          <AnimeContainer />
+        </Route>
+        <Route path="/TopManga" exact>
+          <MangaContainer />
+        </Route>
+        <Route path="/Login">
+          <Login />
+        </Route>
+        </Switch>
         </BrowserRouter>
+
       </AnimeContextProvider>
-      </UserProvider>
+      </IdentityContextProvider>
     </div>
   );
 }

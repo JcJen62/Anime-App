@@ -1,15 +1,14 @@
 import AnimeCard from "./AnimeCard";
 import { Grid } from "@mui/material";
 import AnimeDetailsModal from "../Details/AnimeDetails";
+import { useIdentityContext } from 'react-netlify-identity';
 import {useAnimeContext} from '../../context/AnimeContext'
-import { UserContext } from  "../../context/UserProvider";
-import { Navigate } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 
 
 const AnimeContainer = () => {
-  const user = useContext(UserContext);
-  const [redirect] = useState(null);
+  const {isLoggedIn} = useIdentityContext();
   const context = useAnimeContext()
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
@@ -17,8 +16,8 @@ const AnimeContainer = () => {
   }
   const handleClose = () => setOpen(false)
   
-  if (redirect) {
-    return <Navigate to={'/Login'} />;
+  if (isLoggedIn) {
+    return <Redirect to={'/Login'} />;
   }
 
   return (

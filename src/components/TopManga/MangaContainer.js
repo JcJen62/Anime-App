@@ -1,21 +1,21 @@
 import MangaCard from "./MangaCard";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import { useIdentityContext } from 'react-netlify-identity';
 import { Grid } from "@mui/material";
 import {useAnimeContext} from '../../context/AnimeContext'
-import { UserContext } from "../../context/UserProvider";
-import { Navigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 
 const MangaContainer = () => {
+  const {isLoggedIn} = useIdentityContext();
   const context = useAnimeContext()
-  const user = useContext(UserContext)
-  const [open, setOpen] = useState(false)
+  const [setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
   }
 
-  if(!user.isAuthenticated){
-    <Navigate to={'/Login'} />
+  if(isLoggedIn){
+    <Redirect to={'/Login'} />
   }
 
   return (
