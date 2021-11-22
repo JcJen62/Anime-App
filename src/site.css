@@ -1,0 +1,8 @@
+.details {
+    display: flex;
+    flex-direction: row;
+}
+
+.detailsImg {
+    margin-left: 2rem;
+}

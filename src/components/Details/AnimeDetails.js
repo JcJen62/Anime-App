@@ -1,28 +1,39 @@
-import Modal from '@mui/material/Modal';
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Card } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from 'react'
+import { useAnimeContext } from "../../context/AnimeContext";
 
 const styles = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: '#c9c9bd',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 20,
-    textAlign: 'center'
-  }
-
-const AnimeDetailsModal = (props) => {
-    const { open, onClose } = props
-    return(<Modal open={open} onClose={onClose}>
-        <Box sx={styles}>
-          <Typography variant="h6">Details Coming soon</Typography>
-          <Button onClick={onClose}>Close</Button>
-        </Box>
-      </Modal>
-      )
+  textAlign: 'center'
 }
 
-export default AnimeDetailsModal
+
+const AnimeDetails = (props) => {
+  const [AnimeDetails, setAnimeDetails] = useState();
+  const context = useAnimeContext()
+  useEffect(() => {
+    async function getAnimeDetails(id) {
+      const { data } = await axios.get(`https://api.jikan.moe/v3/anime/${id}`)
+      console.log(data)
+      setAnimeDetails(data)
+    }
+    getAnimeDetails(context.id)
+  }, [setAnimeDetails, AnimeDetails, context.id])
+
+  if (!AnimeDetails) {
+    return <div>Loading...</div>
+  }
+
+  return (
+    <Box>
+      <Typography sx={styles} variant="h6">{AnimeDetails?.title_english}</Typography>
+      <div className="details">
+        <img className="detailsImg" src={AnimeDetails.image_url} alt="Anime Poster" />
+        <Typography sx={{margin: '2rem', textAlign: 'left'}} variant="p">{AnimeDetails?.synopsis}</Typography>
+      </div>
+      <Typography sx={{margin: '2rem'}} variant="p">Score: {AnimeDetails?.score} Episodes: {AnimeDetails?.episodes}</Typography>
+    </Box>
+  )
+}
+
+export default AnimeDetails

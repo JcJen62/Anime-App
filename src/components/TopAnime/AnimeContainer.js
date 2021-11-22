@@ -2,28 +2,42 @@ import AnimeCard from "./AnimeCard";
 import { Grid } from "@mui/material";
 import AnimeDetailsModal from "../Details/AnimeDetails";
 import { useIdentityContext } from 'react-netlify-identity';
-import {useAnimeContext} from '../../context/AnimeContext'
 import { Redirect } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 
 const AnimeContainer = () => {
-  const {isLoggedIn, isConfirmedUser, authedFetch} = useIdentityContext();
-  const context = useAnimeContext()
+  const {isLoggedIn, isConfirmedUser} = useIdentityContext();
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
   }
   const handleClose = () => setOpen(false)
-  
+
+  const [anime, setAnime] = useState([]);
+
   useEffect(() => {
-    authedFetch.get('/.netlify/functions/authEndPoint').then((msg) => {
-      console.log(msg)
-    });
-  })
+    const fetchAnime = async () => {
+      const topAnimeURL = `/.netlify/functions/anime`
+      try {
+        const animeRes = await axios.get(topAnimeURL)
+        console.log(animeRes)
+        const anime = animeRes.data.top
+
+        setAnime(anime)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        console.log('do something')
+      }
+    }
+
+    fetchAnime()
+  }, [])
   
-  if (isLoggedIn && isConfirmedUser) {
-    return <Redirect to={'/Login'} />;
+  if (!isLoggedIn && !isConfirmedUser) {
+    return <Redirect to={'/'} />;
   }
 
   return (
@@ -34,7 +48,7 @@ const AnimeContainer = () => {
         flexWrap: "wrap",
       }}
     >
-      {context.anime.map((anime) => {
+      {anime.map((anime) => {
         return (
           <AnimeCard
             key={anime.mal_id}

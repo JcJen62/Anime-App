@@ -1,35 +1,27 @@
-import React, {createContext, useState, useEffect, useContext} from 'react'
-import axios from 'axios'
+import React, {createContext, useContext, useState} from 'react'
+import { useHistory } from 'react-router-dom'
 
-const AnimeContext = createContext({
-  anime: []
+export const AnimeContext = createContext({
+  id: null
 });
 
 export const AnimeContextProvider = (props) => {
-  const [anime, setAnime] = useState([]);
-
-  useEffect(() => {
-    const fetchAnime = async () => {
-      const topAnimeURL = `/.netlify/functions/anime`
-      try {
-        const animeRes = await axios.get(topAnimeURL)
-        console.log(animeRes)
-        const anime = animeRes.data.top
-
-        setAnime(anime)
-      } catch (err) {
-        console.log(err)
-      } finally {
-        console.log('do something')
-      }
+  const history = useHistory();
+  const [id, setId] = useState();
+  const handleId = (mal_id, type) => {
+    setId(mal_id)
+    if(type === 'anime'){
+      history.push('/AnimeDetails')
+    }else{
+      history.push('/MangaDetails')
     }
-
-    fetchAnime()
-  }, [])
+  }
+  
 
   return (
     <AnimeContext.Provider value={{
-      anime
+      id: id,
+      handleId: handleId
     }}>
       {props.children}
     </AnimeContext.Provider>

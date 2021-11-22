@@ -4,10 +4,12 @@ import {useState} from "react"
 import { Typography } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
+import { useAnimeContext } from "../../context/AnimeContext";
 
 const AnimeCard = (props) => {
     const [added, setAdded] = useState(false)
-    const {anime, handleOpen} = props
+    const {anime} = props
+    const context = useAnimeContext()
 
     const handleFave = (bool) => {
         setAdded(bool)
@@ -26,7 +28,7 @@ const AnimeCard = (props) => {
                         fontSize: 36,
                         color: "black",
                     }} />}</Button>
-                <Button onClick={handleOpen} sx={{
+                <Button onClick={() => context.handleId(anime.mal_id, 'anime')} sx={{
                     color: "black",
                     border: "1px solid black"
                 }}

@@ -4,19 +4,21 @@ import {useState} from "react"
 import { Typography } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
+import { useAnimeContext } from "../../context/AnimeContext";
 
 const MangaCard = (props) => {
     const [added, setAdded] = useState(false)
-    const {anime} = props
+    const {manga} = props
+    const context = useAnimeContext()
 
     const handleFave = (bool) => {
         setAdded(bool)
     }
 
-    return (<Grid className="itemFlex" item xs={4} key={anime.mal_id}>
-        <img src={anime.image_url} alt="Anime Poster" />
+    return (<Grid className="itemFlex" item xs={4} key={manga.mal_id}>
+        <img src={manga.image_url} alt="Manga Poster" />
         <div className="buttonStuff">
-            <Typography variant="h6">{anime.title}</Typography>
+            <Typography variant="h6">{manga.title}</Typography>
             <div className="itemFlex">
                 <Button onClick={() => handleFave(!added)}>
                 {added ? <PlaylistAddCheckIcon sx={{
@@ -26,6 +28,11 @@ const MangaCard = (props) => {
                         fontSize: 36,
                         color: "black",
                     }} />}</Button>
+                <Button onClick={() => context.handleId(manga.mal_id, 'manga')} sx={{
+                    color: "black",
+                    border: "1px solid black"
+                }}
+                >Learn More</Button>
             </div>
         </div>
     </Grid>

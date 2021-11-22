@@ -33,6 +33,10 @@ const useStyles = makeStyles(() => createStyles({
     },
     buttonStuff: {
       marginBotton: 3
+    },
+    details: {
+      display: 'flex',
+      flexDirection: 'row'
     }
   }
 }));

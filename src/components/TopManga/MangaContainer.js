@@ -1,27 +1,41 @@
 import MangaCard from "./MangaCard";
-import React, { useState, useEffect } from "react";
 import { useIdentityContext } from 'react-netlify-identity';
 import { Grid } from "@mui/material";
-import {useAnimeContext} from '../../context/AnimeContext'
 import { Redirect } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 
 const MangaContainer = () => {
-  const {isLoggedIn, isConfirmedUser, authedFetch} = useIdentityContext();
-  const context = useAnimeContext()
+  const {isLoggedIn, isConfirmedUser} = useIdentityContext();
   const [setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
   }
 
-  useEffect(() => {
-    authedFetch.get('/.netlify/functions/authEndPoint').then((msg) => {
-      console.log(msg)
-    });
-  })
+  const [manga, setManga] = useState([]);
 
-  if(isLoggedIn && isConfirmedUser){
-    <Redirect to={'/Login'} />
+  useEffect(() => {
+    const fetchManga = async () => {
+      const topMangaURL = `/.netlify/functions/manga`
+      try {
+        const mangaRes = await axios.get(topMangaURL)
+        console.log(mangaRes)
+        const manga = mangaRes.data.top
+
+        setManga(manga)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        console.log('do something')
+      }
+    }
+
+    fetchManga()
+  }, [])
+
+  if(!isLoggedIn && !isConfirmedUser){
+    return <Redirect to={'/'} />
   }
 
   return (
@@ -32,11 +46,11 @@ const MangaContainer = () => {
         flexWrap: "wrap",
       }}
     >
-      {context.anime.map((anime) => {
+      {manga.map((manga) => {
         return (
           <MangaCard
-            key={anime.mal_id}
-            anime={anime}
+            key={manga.mal_id}
+            manga={manga}
             handleOpen={handleOpen}
           ></MangaCard>
         );
