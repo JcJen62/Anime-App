@@ -4,11 +4,11 @@ import AnimeDetailsModal from "../Details/AnimeDetails";
 import { useIdentityContext } from 'react-netlify-identity';
 import {useAnimeContext} from '../../context/AnimeContext'
 import { Redirect } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 const AnimeContainer = () => {
-  const {isLoggedIn} = useIdentityContext();
+  const {isLoggedIn, isConfirmedUser, authedFetch} = useIdentityContext();
   const context = useAnimeContext()
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
@@ -16,7 +16,13 @@ const AnimeContainer = () => {
   }
   const handleClose = () => setOpen(false)
   
-  if (isLoggedIn) {
+  useEffect(() => {
+    authedFetch.get('/.netlify/functions/authEndPoint').then((msg) => {
+      console.log(msg)
+    });
+  })
+  
+  if (isLoggedIn && isConfirmedUser) {
     return <Redirect to={'/Login'} />;
   }
 
