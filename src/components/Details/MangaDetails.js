@@ -19,6 +19,10 @@ const MangaDetails = (props) => {
     getMangaDetails(context.id)
   }, [setMangaDetails, MangaDetails, context.id])
 
+  if (!isLoggedIn && !isConfirmedUser) {
+    return <Redirect to={'/'} />;
+  }
+  
   if (!MangaDetails) {
     return <div>Loading...</div>
   }

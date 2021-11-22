@@ -20,6 +20,10 @@ const AnimeDetails = (props) => {
     getAnimeDetails(context.id)
   }, [setAnimeDetails, AnimeDetails, context.id])
 
+  if (!isLoggedIn && !isConfirmedUser) {
+    return <Redirect to={'/'} />;
+  }
+
   if (!AnimeDetails) {
     return <div>Loading...</div>
   }
