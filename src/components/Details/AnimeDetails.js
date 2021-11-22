@@ -2,6 +2,7 @@ import { Typography, Box } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { useAnimeContext } from "../../context/AnimeContext";
+import { useIdentityContext } from 'react-netlify-identity';
 
 const styles = {
   textAlign: 'center'
@@ -11,6 +12,7 @@ const styles = {
 const AnimeDetails = (props) => {
   const [AnimeDetails, setAnimeDetails] = useState();
   const context = useAnimeContext()
+  const {isLoggedIn, isConfirmedUser} = useIdentityContext();
   useEffect(() => {
     async function getAnimeDetails(id) {
       const { data } = await axios.get(`https://api.jikan.moe/v3/anime/${id}`)
