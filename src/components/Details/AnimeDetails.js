@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { useAnimeContext } from "../../context/AnimeContext";
 import { useIdentityContext } from 'react-netlify-identity';
+import { Redirect } from "react-router-dom";
 
 const styles = {
   textAlign: 'center'
