@@ -3,7 +3,7 @@ import React from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { createBrowserHistory } from "history";
+import { useHistory } from 'react-router-dom'
 
 export function Login() {
     const { loginUser, signupUser } = useIdentityContext();
@@ -14,7 +14,7 @@ export function Login() {
         border: "1px solid black",
         margin: "0.5rem"
     }
-    const history = createBrowserHistory();
+    const history = useHistory();
 
     const login = () => {
         const email = formRef.current[0].value;
