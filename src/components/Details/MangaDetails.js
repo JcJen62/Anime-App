@@ -1,4 +1,4 @@
-import { Typography, Box, Card } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { useAnimeContext } from "../../context/AnimeContext";
