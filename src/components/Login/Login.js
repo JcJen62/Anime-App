@@ -3,7 +3,8 @@ import React from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 export function Login() {
     const { loginUser, signupUser } = useIdentityContext();
@@ -49,7 +50,7 @@ export function Login() {
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                 }}
                 noValidate
-                autoComplete="off"
+                autoComplete="on"
             >
                 <div>
                     <TextField
@@ -78,3 +79,10 @@ export function Logout() {
     return <Button sx={style} onClick={logoutUser}>Logout</Button>;
 }
 
+export function Dashboard() {
+    return (
+      <div>
+        <Typography variant='h4'>Please Verify Email</Typography>
+      </div>
+    );
+  }

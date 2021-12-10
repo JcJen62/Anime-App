@@ -5,6 +5,7 @@ import GlobalStyles from "./components/GlobalStyles";
 import Navigation from "./components/Navigation";
 import { Route } from 'react-router-dom'
 import { Login } from './components/Login/Login'
+import { Dashboard } from "./components/Login/Login";
 import { IdentityContextProvider } from 'react-netlify-identity';
 import AnimeContainer from './components/TopAnime/AnimeContainer'
 import MangaContainer from './components/TopManga/MangaContainer'
@@ -23,6 +24,10 @@ function App() {
         <Navigation />
         <Route path="/" exact>
           <Login />
+        </Route>
+
+        <Route path="/Dashboard" exact>
+          <Dashboard />
         </Route>
 
         <Route path="/TopAnime" exact>

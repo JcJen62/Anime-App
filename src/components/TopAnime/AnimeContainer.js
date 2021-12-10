@@ -1,5 +1,5 @@
 import AnimeCard from "./AnimeCard";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import AnimeDetailsModal from "../Details/AnimeDetails";
 import { useIdentityContext } from 'react-netlify-identity';
 import { Redirect } from "react-router-dom";
@@ -8,7 +8,7 @@ import axios from 'axios'
 
 
 const AnimeContainer = () => {
-  const {isLoggedIn, isConfirmedUser} = useIdentityContext();
+  const { isLoggedIn, isConfirmedUser } = useIdentityContext();
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -35,12 +35,19 @@ const AnimeContainer = () => {
 
     fetchAnime()
   }, [])
-  
-  if (!isLoggedIn && !isConfirmedUser) {
+
+  if (!isLoggedIn) {
     return <Redirect to={'/'} />;
   }
 
+  if(!isConfirmedUser){
+    return <Redirect to={'/Dashboard'} />;
+  }
+
   return (
+    <div>
+      <Typography variant="h4">The Top 50 Anime</Typography>
+    
     <Grid
       container
       sx={{
@@ -62,6 +69,7 @@ const AnimeContainer = () => {
         onClose={handleClose}
       />
     </Grid>
+    </div>
   );
 };
 

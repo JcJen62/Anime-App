@@ -34,8 +34,12 @@ const MangaContainer = () => {
     fetchManga()
   }, [])
 
-  if(!isLoggedIn && !isConfirmedUser){
+  if(!isLoggedIn){
     return <Redirect to={'/'} />
+  }
+
+  if(!isConfirmedUser){
+    return <Redirect to={'/Dashboard'} />;
   }
 
   return (

@@ -23,8 +23,12 @@ const AnimeDetails = (props) => {
     getAnimeDetails(context.id)
   }, [setAnimeDetails, AnimeDetails, context.id])
 
-  if (!isLoggedIn && !isConfirmedUser) {
+  if (!isLoggedIn) {
     return <Redirect to={'/'} />;
+  }
+
+  if(!isConfirmedUser){
+    return <Redirect to={'/Dashboard'} />;
   }
 
   if (!AnimeDetails) {
