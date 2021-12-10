@@ -6,3 +6,13 @@
 .detailsImg {
     margin-left: 2rem;
 }
+
+#login {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.inputLogin{
+    max-width: 15rem;
+}

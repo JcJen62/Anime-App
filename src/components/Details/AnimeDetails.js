@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Fade } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { useAnimeContext } from "../../context/AnimeContext";
@@ -13,7 +13,7 @@ const styles = {
 const AnimeDetails = (props) => {
   const [AnimeDetails, setAnimeDetails] = useState();
   const context = useAnimeContext()
-  const {isLoggedIn, isConfirmedUser} = useIdentityContext();
+  const { isLoggedIn, isConfirmedUser } = useIdentityContext();
   useEffect(() => {
     async function getAnimeDetails(id) {
       const { data } = await axios.get(`https://api.jikan.moe/v3/anime/${id}`)
@@ -24,10 +24,10 @@ const AnimeDetails = (props) => {
   }, [setAnimeDetails, AnimeDetails, context.id])
 
   if (!isLoggedIn) {
-    return <Redirect to={'/'} />;
+    return <Redirect to={'/Login'} />;
   }
 
-  if(!isConfirmedUser){
+  if (!isConfirmedUser) {
     return <Redirect to={'/Dashboard'} />;
   }
 
@@ -36,14 +36,16 @@ const AnimeDetails = (props) => {
   }
 
   return (
-    <Box>
-      <Typography sx={styles} variant="h6">{AnimeDetails?.title_english}</Typography>
-      <div className="details">
-        <img className="detailsImg" src={AnimeDetails.image_url} alt="Anime Poster" />
-        <Typography sx={{margin: '2rem', textAlign: 'left'}} variant="p">{AnimeDetails?.synopsis}</Typography>
-      </div>
-      <Typography sx={{margin: '2rem'}} variant="p">Score: {AnimeDetails?.score} Episodes: {AnimeDetails?.episodes}</Typography>
-    </Box>
+    <Fade in timeout={3000} easing={`ease-in-out`}>
+      <Box>
+        <Typography sx={styles} variant="h6">{AnimeDetails?.title_english}</Typography>
+        <div className="details">
+          <img className="detailsImg" src={AnimeDetails.image_url} alt="Anime Poster" />
+          <Typography sx={{ margin: '2rem', textAlign: 'left' }} variant="p">{AnimeDetails?.synopsis}</Typography>
+        </div>
+        <Typography sx={{ margin: '2rem' }} variant="p">Score: {AnimeDetails?.score} Episodes: {AnimeDetails?.episodes}</Typography>
+      </Box>
+    </Fade>
   )
 }
 

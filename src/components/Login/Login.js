@@ -7,13 +7,14 @@ import { useHistory } from 'react-router-dom';
 import { Typography } from '@mui/material';
 
 export function Login() {
-    const { loginUser, signupUser } = useIdentityContext();
+    const { loginUser } = useIdentityContext();
     const formRef = React.useRef();
     const [msg, setMsg] = React.useState('');
     const style = {
         color: "black",
         border: "1px solid black",
-        margin: "0.5rem"
+        margin: "0.5rem",
+        maxWidth: "8rem"
     }
     const history = useHistory();
 
@@ -24,43 +25,118 @@ export function Login() {
         loginUser(email, password, true)
             .then(user => {
                 console.log('Success! Logged in', user);
-                history.push('/TopAnime');
+                history.push('/');
             })
             .catch(err => console.error(err) || setMsg('Error: ' + err.message));
     }
 
-    const signup = () => {
-        const email = formRef.current[0].value;
-        const password = formRef.current[2].value;
-
-        signupUser(email, password)
-            .then(user => {
-                console.log('Success! Signed up', user);
-                history.push('/TopAnime');
-            })
-            .catch(err => console.error(err) || setMsg('Error: ' + err.message));
-    };
-
     return (
         <form
-        ref={formRef}
+            ref={formRef}
         >
             <Box
                 sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                    margin: '0 auto',
+                    width: 400,
+                    backgroundColor: '#e6e6db',
+                    border: '1px solid #000',
+                    p: 4,
                 }}
                 noValidate
                 autoComplete="on"
             >
                 <div>
                     <TextField
+                        sx={{
+                            margin: '0.8rem'
+                        }}
+                        className="inputLogin"
                         defaultValue="Email"
                     />
                     <TextField
+                        sx={{
+                            margin: '0.8rem'
+                        }}
+                        className="inputLogin"
                         defaultValue="Password"
                     />
-
+                </div>
+                <div >
                     <Button onClick={login} sx={style} variant="outlined">Login</Button>
+                    {msg && <pre>{msg}</pre>}
+
+                    <Typography variant='p'>Need to Sign Up?</Typography>
+                    <Button onClick={() => history.push('/SignUp')} sx={style}>Sign Up Here</Button>
+                </div>
+
+            </Box>
+        </form>
+    );
+}
+
+export function SignUp() {
+    const { signupUser } = useIdentityContext();
+    const formRef = React.useRef();
+    const [msg, setMsg] = React.useState('');
+    const style = {
+        color: "black",
+        border: "1px solid black",
+        margin: "0.5rem",
+        maxWidth: "8rem"
+    }
+    const history = useHistory();
+
+    const signup = () => {
+        const email = formRef.current[2].value;
+        const password = formRef.current[4].value;
+
+        signupUser(email, password)
+            .then(user => {
+                console.log('Success! Signed up', user);
+                history.push('/Dashboard');
+            })
+            .catch(err => console.error(err) || setMsg('Error: ' + err.message));
+    };
+
+    return (
+        <form
+            ref={formRef}
+        >
+            <Box
+                sx={{
+                    margin: '0 auto',
+                    width: 400,
+                    backgroundColor: '#e6e6db',
+                    border: '1px solid #000',
+                    p: 4,
+                }}
+                noValidate
+                autoComplete="on"
+            >
+                <div>
+                    <TextField
+                        sx={{
+                            margin: '0.8rem'
+                        }}
+                        className="inputLogin"
+                        defaultValue="Full Name"
+                    />
+                    <TextField
+                        sx={{
+                            margin: '0.8rem'
+                        }}
+                        className="inputLogin"
+                        defaultValue="Email"
+                    />
+                    <TextField
+                        sx={{
+                            margin: '0.8rem'
+                        }}
+                        className="inputLogin"
+                        defaultValue="Password"
+                    />
+                </div>
+                <div >
                     <Button onClick={signup} sx={style} variant="outlined">Sign Up </Button>
                     {msg && <pre>{msg}</pre>}
                 </div>
@@ -81,8 +157,8 @@ export function Logout() {
 
 export function Dashboard() {
     return (
-      <div>
-        <Typography variant='h4'>Please Verify Email</Typography>
-      </div>
+        <div>
+            <Typography variant='h4'>Please Verify Email</Typography>
+        </div>
     );
-  }
+}

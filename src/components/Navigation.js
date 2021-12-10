@@ -17,7 +17,7 @@ const Navigation = () => {
     }
 
     return (<Stack spacing={2} direction="row">
-        <Button onClick={() => handleNav('/TopAnime')} sx={style} variant="text">Top 50 Anime</Button>
+        <Button onClick={() => handleNav('/')} sx={style} variant="text">Top 50 Anime</Button>
         <Button onClick={() => handleNav('/TopManga')} sx={style} variant="text">Top 50 Manga</Button>
         {isLoggedIn ? <Logout /> : null}
     </Stack>)

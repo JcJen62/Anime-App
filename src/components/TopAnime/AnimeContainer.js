@@ -37,38 +37,34 @@ const AnimeContainer = () => {
   }, [])
 
   if (!isLoggedIn) {
-    return <Redirect to={'/'} />;
+    return <Redirect to={'/Login'} />;
   }
 
-  if(!isConfirmedUser){
+  if (!isConfirmedUser) {
     return <Redirect to={'/Dashboard'} />;
   }
 
   return (
     <div>
       <Typography variant="h4">The Top 50 Anime</Typography>
-    
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-      }}
-    >
-      {anime.map((anime) => {
-        return (
-          <AnimeCard
-            key={anime.mal_id}
-            anime={anime}
-            handleOpen={handleOpen}
-          ></AnimeCard>
-        );
-      })}
-      <AnimeDetailsModal
-        open={open}
-        onClose={handleClose}
-      />
-    </Grid>
+
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        {anime.map((anime) => {
+          return (
+            <AnimeCard
+              key={anime.mal_id}
+              anime={anime}
+              handleOpen={handleOpen}
+            ></AnimeCard>
+          );
+        })}
+      </Grid>
     </div>
   );
 };

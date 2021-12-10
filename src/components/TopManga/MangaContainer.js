@@ -1,13 +1,13 @@
 import MangaCard from "./MangaCard";
 import { useIdentityContext } from 'react-netlify-identity';
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Redirect } from "react-router-dom";
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
 const MangaContainer = () => {
-  const {isLoggedIn, isConfirmedUser} = useIdentityContext();
+  const { isLoggedIn, isConfirmedUser } = useIdentityContext();
   const [setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -34,32 +34,35 @@ const MangaContainer = () => {
     fetchManga()
   }, [])
 
-  if(!isLoggedIn){
-    return <Redirect to={'/'} />
+  if (!isLoggedIn) {
+    return <Redirect to={'/Login'} />
   }
 
-  if(!isConfirmedUser){
+  if (!isConfirmedUser) {
     return <Redirect to={'/Dashboard'} />;
   }
 
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-      }}
-    >
-      {manga.map((manga) => {
-        return (
-          <MangaCard
-            key={manga.mal_id}
-            manga={manga}
-            handleOpen={handleOpen}
-          ></MangaCard>
-        );
-      })}
-    </Grid>
+    <div>
+      <Typography variant="h4">The Top 50 Manga</Typography>
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        {manga.map((manga) => {
+          return (
+            <MangaCard
+              key={manga.mal_id}
+              manga={manga}
+              handleOpen={handleOpen}
+            ></MangaCard>
+          );
+        })}
+      </Grid>
+    </div>
   );
 };
 

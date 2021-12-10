@@ -4,7 +4,7 @@ import {AnimeContextProvider} from "./context/AnimeContext";
 import GlobalStyles from "./components/GlobalStyles";
 import Navigation from "./components/Navigation";
 import { Route } from 'react-router-dom'
-import { Login } from './components/Login/Login'
+import { Login, SignUp } from './components/Login/Login'
 import { Dashboard } from "./components/Login/Login";
 import { IdentityContextProvider } from 'react-netlify-identity';
 import AnimeContainer from './components/TopAnime/AnimeContainer'
@@ -22,15 +22,19 @@ function App() {
       <AnimeContextProvider>
 
         <Navigation />
-        <Route path="/" exact>
+        <Route path="/Login" exact>
           <Login />
+        </Route>
+
+        <Route path="/SignUp" exact>
+          <SignUp />
         </Route>
 
         <Route path="/Dashboard" exact>
           <Dashboard />
         </Route>
 
-        <Route path="/TopAnime" exact>
+        <Route path="/" exact>
           <AnimeContainer />
         </Route>
         <Route path="/TopManga" exact>
