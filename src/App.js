@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import { Route } from 'react-router-dom'
 import { Login, SignUp } from './components/Login/Login'
 import { Dashboard } from "./components/Login/Login";
-import { IdentityContextProvider } from 'react-netlify-identity';
+import NetlifyIdentityContext from 'react-netlify-identity-gotrue'
 import AnimeContainer from './components/TopAnime/AnimeContainer'
 import MangaContainer from './components/TopManga/MangaContainer'
 import AnimeDetails from './components/Details/AnimeDetails'
@@ -15,10 +15,9 @@ import './site.css'
 
 function App() {
   GlobalStyles();
-  const url = 'https://dgm3790.jeremyjensen.net/'
   return (
     <div className="App">
-      <IdentityContextProvider url={url}>
+      <NetlifyIdentityContext url={'https://dgm3790.jeremyjensen.net/'}>
       <AnimeContextProvider>
 
         <Navigation />
@@ -47,7 +46,7 @@ function App() {
           <MangaDetails />
         </Route>
       </AnimeContextProvider>
-      </IdentityContextProvider>
+      </NetlifyIdentityContext>
     </div>
   );
 }

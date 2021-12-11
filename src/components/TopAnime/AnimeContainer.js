@@ -1,13 +1,13 @@
 import AnimeCard from "./AnimeCard";
 import { Grid, Typography } from "@mui/material";
-import { useIdentityContext } from 'react-netlify-identity';
+import { useIdentityContext } from 'react-netlify-identity-gotrue'
 import { Redirect } from "react-router-dom";
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
 const AnimeContainer = () => {
-  const { isLoggedIn, isConfirmedUser } = useIdentityContext();
+  const identity = useIdentityContext();
   const [setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -34,11 +34,11 @@ const AnimeContainer = () => {
     fetchAnime()
   }, [])
 
-  if (!isLoggedIn) {
+  if (!identity.user) {
     return <Redirect to={'/Login'} />;
   }
 
-  if (!isConfirmedUser) {
+  if (!identity.user.comfirmed_at) {
     return <Redirect to={'/Dashboard'} />;
   }
 
