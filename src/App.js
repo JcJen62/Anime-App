@@ -17,7 +17,7 @@ function App() {
   GlobalStyles();
   return (
     <div className="App">
-      <NetlifyIdentityContext url='https://dgm3790.jeremyjensen.net/'>
+      <NetlifyIdentityContext url='https://dgm3790.jeremyjensen.net'>
       <AnimeContextProvider>
 
         <Navigation />
