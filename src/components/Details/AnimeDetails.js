@@ -28,7 +28,7 @@ const AnimeDetails = (props) => {
     return <Redirect to={'/Login'} />;
   }
 
-  if (!identity.user.comfirmed_at) {
+  if (!identity.provisionalUser) {
     return <Redirect to={'/Dashboard'} />;
   }
 

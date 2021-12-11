@@ -9,7 +9,6 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 export function Login() {
-    const [msg] = React.useState('');
     const history = useHistory();
     const identity = useIdentityContext();
     const style = {
@@ -44,7 +43,7 @@ export function Login() {
                         await identity.login({
                             email: value.email,
                             password: value.password
-                          })
+                        })
                             .then(user => {
                                 console.log('Success! logged In', user);
                                 history.push('/');
@@ -87,37 +86,36 @@ export function Login() {
                         >
                             <div>
                                 <TextField
-                                    sx={{
-                                        margin: '0.8rem'
-                                    }}
-                                    className="inputLogin"
                                     error={Boolean(touched.email && errors.email)}
+                                    fullWidth
                                     helperText={touched.email && errors.email}
+                                    label="Email Address"
+                                    margin="normal"
+                                    name="email"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value={values.email}
-                                    name="email"
                                     type="email"
-                                    label="Email Address"
+                                    variant="outlined"
+                                    value={values.email}
+                                    className="inputLogin"
                                 />
                                 <TextField
-                                    sx={{
-                                        margin: '0.8rem'
-                                    }}
-                                    className="inputLogin"
                                     error={Boolean(touched.password && errors.password)}
+                                    fullWidth
                                     helperText={touched.password && errors.password}
+                                    label="Password"
+                                    margin="normal"
+                                    name="password"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value={values.password}
-                                    name="password"
                                     type="password"
-                                    label="Password"
+                                    variant="outlined"
+                                    value={values.password}
+                                    className="inputLogin"
                                 />
                             </div>
                             <div >
                                 <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Login</Button>
-                                {msg && <pre>{msg}</pre>}
 
                                 <Typography variant='p'>Need to Sign Up?</Typography>
                                 <Button onClick={() => history.push('/SignUp')} sx={style}>Sign Up Here</Button>
@@ -171,14 +169,15 @@ export function SignUp() {
                     try {
                         setStatus({ success: true })
                         setSubmitting(false)
+                        console.log(value.email)
                         await identity.signup({
                             email: value.email, password: value.password, user_metadata: {
-                              full_name: value.userName
+                                full_name: value.userName
                             }
-                          }).then(() => {
+                        }).then(() => {
                             history.push('/Dashboard')
                             console.log('Successfully submitted!')
-                          })
+                        })
 
 
                     } catch (err) {
