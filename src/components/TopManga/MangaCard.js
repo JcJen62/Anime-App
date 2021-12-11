@@ -18,19 +18,19 @@ const MangaCard = (props) => {
     return (<Grid className="itemFlex" item xs={4} key={manga.mal_id}>
         <img src={manga.image_url} alt="Manga Poster" />
         <div className="buttonStuff">
-            <Typography variant="h6">{manga.title}</Typography>
+            <Typography sx={{color: 'white'}} variant="h6">{manga.title}</Typography>
             <div className="itemFlex">
                 <Button onClick={() => handleFave(!added)}>
                 {added ? <PlaylistAddCheckIcon sx={{
                     fontSize: 36,
-                    color: "black",
+                    color: "white",
                     }} />: <PlaylistAddIcon sx={{
                         fontSize: 36,
-                        color: "black",
+                        color: "white",
                     }} />}</Button>
                 <Button onClick={() => context.handleId(manga.mal_id, 'manga')} sx={{
-                    color: "black",
-                    border: "1px solid black"
+                    color: "white",
+                    border: "1px solid white"
                 }}
                 >Learn More</Button>
             </div>

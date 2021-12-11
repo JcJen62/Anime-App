@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => createStyles({
       padding: 0,
     },
     '.App': {
-        'background-color': '#f5f5da'
+        'background-color': '#6a7a81'
     },
     a: {
       textDecoration: 'none'

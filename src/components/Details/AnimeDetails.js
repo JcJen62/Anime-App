@@ -6,7 +6,8 @@ import { useIdentityContext } from 'react-netlify-identity';
 import { Redirect } from "react-router-dom";
 
 const styles = {
-  textAlign: 'center'
+  textAlign: 'center',
+  color: 'white'
 }
 
 
@@ -39,11 +40,11 @@ const AnimeDetails = (props) => {
     <Fade in timeout={3000} easing={`ease-in-out`}>
       <Box>
         <Typography sx={styles} variant="h6">{AnimeDetails?.title_english}</Typography>
+        <Typography sx={{ margin: '2rem', color: 'white' }} variant="p">Score: {AnimeDetails?.score} Episodes: {AnimeDetails?.episodes}</Typography>
         <div className="details">
           <img className="detailsImg" src={AnimeDetails.image_url} alt="Anime Poster" />
-          <Typography sx={{ margin: '2rem', textAlign: 'left' }} variant="p">{AnimeDetails?.synopsis}</Typography>
+          <Typography sx={{ margin: '2rem', textAlign: 'left', color: 'white' }} variant="p">{AnimeDetails?.synopsis}</Typography>
         </div>
-        <Typography sx={{ margin: '2rem' }} variant="p">Score: {AnimeDetails?.score} Episodes: {AnimeDetails?.episodes}</Typography>
       </Box>
     </Fade>
   )

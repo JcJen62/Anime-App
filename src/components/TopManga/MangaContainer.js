@@ -44,7 +44,7 @@ const MangaContainer = () => {
 
   return (
     <div>
-      <Typography variant="h4">The Top 50 Manga</Typography>
+      <Typography sx={{color: 'white', marginBottom: '1rem'}} variant="h4">The Top 50 Manga</Typography>
       <Grid
         container
         sx={{

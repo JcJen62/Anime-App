@@ -1,6 +1,8 @@
 .details {
     display: flex;
     flex-direction: row;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .detailsImg {
@@ -15,4 +17,8 @@
 
 .inputLogin{
     max-width: 15rem;
+}
+
+body {
+    background-color: #6a7a81;
 }

@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom'
 const Navigation = () => {
     const {isLoggedIn} = useIdentityContext();
     const style ={
-        color: "black",
+        color: "white",
     }
     const history = useHistory();
     const handleNav = (path) => {
