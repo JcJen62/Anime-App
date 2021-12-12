@@ -17,15 +17,15 @@ function App() {
   GlobalStyles();
   return (
     <div className="App">
-      <NetlifyIdentityContext url='https://dgm3790.jeremyjensen.net/'>
+      <NetlifyIdentityContext url='https://dgm3790.jeremyjensen.net'>
       <AnimeContextProvider>
 
         <Navigation />
-        <Route path="/Login" exact>
+        <Route path="/Login">
           <Login />
         </Route>
 
-        <Route path="/SignUp" exact>
+        <Route path="/SignUp">
           <SignUp />
         </Route>
 
