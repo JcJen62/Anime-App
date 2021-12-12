@@ -32,7 +32,7 @@ export function Login() {
         >
             <Formik
                 initialValues={{
-                    email: 'Test@gmail.com',
+                    email: 'test@example.com',
                     password: 'Password',
                 }}
                 validationSchema={Yup.object().shape({
@@ -52,18 +52,17 @@ export function Login() {
                         await identity.login({
                             email: value.email,
                             password: value.password
+                        }).then(() => {
+                            console.log('Successfully submitted!')
+                            history.push('/')
                         })
-                            .then(user => {
-                                console.log('Success! logged In', user);
-                                history.push('/');
-                            })
-
-
                     } catch (err) {
                         console.error(err)
                         setStatus({ success: false })
                         setErrors({ submit: err.message })
                         setSubmitting(false)
+                    } finally {
+                        history.push('/')
                     }
                 }}
             >
