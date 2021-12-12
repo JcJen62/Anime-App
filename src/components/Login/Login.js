@@ -20,7 +20,18 @@ export function Login() {
 
 
     return (
-        <>
+        <Box
+            sx={{
+                margin: '0 auto',
+                width: 400,
+                backgroundColor: 'white',
+                border: '1px solid #000',
+                p: 4,
+                borderRadius: '5px'
+            }}
+            noValidate
+            autoComplete="on"
+        >
             <Formik
                 initialValues={{
                     email: 'Test@gmail.com',
@@ -72,60 +83,47 @@ export function Login() {
                         noValidate
                         onSubmit={handleSubmit}
                     >
-                        <Box
-                            sx={{
-                                margin: '0 auto',
-                                width: 400,
-                                backgroundColor: 'white',
-                                border: '1px solid #000',
-                                p: 4,
-                                borderRadius: '5px'
-                            }}
-                            noValidate
-                            autoComplete="on"
-                        >
-                            <div>
-                                <TextField
-                                    error={Boolean(touched.email && errors.email)}
-                                    fullWidth
-                                    helperText={touched.email && errors.email}
-                                    label="Email Address"
-                                    margin="normal"
-                                    name="email"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    type="email"
-                                    variant="outlined"
-                                    value={values.email}
-                                    className="inputLogin"
-                                />
-                                <TextField
-                                    error={Boolean(touched.password && errors.password)}
-                                    fullWidth
-                                    helperText={touched.password && errors.password}
-                                    label="Password"
-                                    margin="normal"
-                                    name="password"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    type="password"
-                                    variant="outlined"
-                                    value={values.password}
-                                    className="inputLogin"
-                                />
-                            </div>
-                            <div >
-                                <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Login</Button>
+                        <div>
+                            <TextField
+                                error={Boolean(touched.email && errors.email)}
+                                fullWidth
+                                helperText={touched.email && errors.email}
+                                label="Email Address"
+                                margin="normal"
+                                name="email"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                type="email"
+                                variant="outlined"
+                                value={values.email}
+                                className="inputLogin"
+                            />
+                            <TextField
+                                error={Boolean(touched.password && errors.password)}
+                                fullWidth
+                                helperText={touched.password && errors.password}
+                                label="Password"
+                                margin="normal"
+                                name="password"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                type="password"
+                                variant="outlined"
+                                value={values.password}
+                                className="inputLogin"
+                            />
+                        </div>
+                        <div >
+                            <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Login</Button>
 
-                                <Typography variant='p'>Need to Sign Up?</Typography>
-                                <Button onClick={() => history.push('/SignUp')} sx={style}>Sign Up Here</Button>
-                            </div>
+                            <Typography variant='p'>Need to Sign Up?</Typography>
+                            <Button onClick={() => history.push('/SignUp')} sx={style}>Sign Up Here</Button>
+                        </div>
 
-                        </Box>
                     </form>
                 )}
             </Formik>
-        </>
+        </Box>
     );
 }
 
@@ -144,7 +142,18 @@ export function SignUp() {
 
 
     return (
-        <>
+        <Box
+            sx={{
+                margin: '0 auto',
+                width: 400,
+                backgroundColor: 'white',
+                border: '1px solid #000',
+                p: 4,
+                borderRadius: '5px'
+            }}
+            noValidate
+            autoComplete="on"
+        >
             <Formik
                 initialValues={{
                     userName: 'Jon Doe',
@@ -202,72 +211,61 @@ export function SignUp() {
                         noValidate
                         onSubmit={handleSubmit}
                     >
-                        <Box
-                            sx={{
-                                margin: '0 auto',
-                                width: 400,
-                                backgroundColor: 'white',
-                                border: '1px solid #000',
-                                p: 4,
-                                borderRadius: '5px'
-                            }}
-                            noValidate
-                            autoComplete="on"
-                        >
-                            <div>
-                                <TextField
-                                    sx={{
-                                        margin: '0.8rem'
-                                    }}
-                                    className="inputLogin"
-                                    error={Boolean(touched.userName && errors.userName)}
-                                    helperText={touched.userName && errors.userName}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.userName}
-                                    name="userName"
-                                    type="text"
-                                    label="User Name"
-                                />
-                                <TextField
-                                    sx={{
-                                        margin: '0.8rem'
-                                    }}
-                                    className="inputLogin"
-                                    error={Boolean(touched.email && errors.email)}
-                                    helperText={touched.email && errors.email}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.email}
-                                    name="email"
-                                    type="email"
-                                    label="Email Address"
-                                />
-                                <TextField
-                                    sx={{
-                                        margin: '0.8rem'
-                                    }}
-                                    className="inputLogin"
-                                    error={Boolean(touched.password && errors.password)}
-                                    helperText={touched.password && errors.password}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.password}
-                                    name="password"
-                                    type="password"
-                                    label="Password"
-                                />
-                            </div>
-                            <div >
-                                <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Sign Up </Button>
-                                {msg && <pre>{msg}</pre>}
-                            </div>
+                        <div>
+                            <TextField
+                                sx={{
+                                    margin: '0.8rem'
+                                }}
+                                className="inputLogin"
+                                error={Boolean(touched.userName && errors.userName)}
+                                helperText={touched.userName && errors.userName}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.userName}
+                                name="userName"
+                                type="text"
+                                label="User Name"
+                            />
+                            <TextField
+                                sx={{
+                                    margin: '0.8rem'
+                                }}
+                                className="inputLogin"
+                                error={Boolean(touched.email && errors.email)}
+                                helperText={touched.email && errors.email}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.email}
+                                name="email"
+                                type="email"
+                                label="Email Address"
+                            />
+                            <TextField
+                                sx={{
+                                    margin: '0.8rem'
+                                }}
+                                className="inputLogin"
+                                error={Boolean(touched.password && errors.password)}
+                                helperText={touched.password && errors.password}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.password}
+                                name="password"
+                                type="password"
+                                label="Password"
+                            />
+                        </div>
+                        <div >
+                            <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Sign Up </Button>
+                            {msg && <pre>{msg}</pre>}
+                        </div>
 
-                        </Box>
+
                     </form>
-                )}
-            </Formik>
-        </>
+                )
+                }
+            </Formik >
+        </Box>
     );
 }
 
