@@ -1,4 +1,4 @@
-import {useIdentityContext} from 'react-netlify-identity-gotrue';
+import { useIdentityContext } from 'react-netlify-identity-gotrue';
 import React from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -29,8 +29,6 @@ export function Login() {
                 p: 4,
                 borderRadius: '5px'
             }}
-            noValidate
-            autoComplete="on"
         >
             <Formik
                 initialValues={{
@@ -147,8 +145,6 @@ export function SignUp() {
                 p: 4,
                 borderRadius: '5px'
             }}
-            noValidate
-            autoComplete="on"
         >
             <Formik
                 initialValues={{
