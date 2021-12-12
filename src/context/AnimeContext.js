@@ -8,6 +8,7 @@ export const AnimeContext = createContext({
 export const AnimeContextProvider = (props) => {
   const history = useHistory();
   const [id, setId] = useState();
+  const [isDev, setDev]= useState(false);
   const handleId = (mal_id, type) => {
     setId(mal_id)
     if(type === 'anime'){
@@ -16,12 +17,18 @@ export const AnimeContextProvider = (props) => {
       history.push('/MangaDetails')
     }
   }
+  const handleDev = (_isDev) => {
+    setDev(_isDev)
+    history.push('/')
+  }
   
 
   return (
     <AnimeContext.Provider value={{
       id: id,
-      handleId: handleId
+      isDev: isDev,
+      handleId: handleId,
+      handleDev: handleDev
     }}>
       {props.children}
     </AnimeContext.Provider>

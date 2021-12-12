@@ -5,10 +5,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import { Formik } from 'formik'
-import * as Yup from 'yup'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useAnimeContext } from '../../context/AnimeContext';
 
 export function Login() {
+    const isDev = useAnimeContext();
     const history = useHistory();
     const identity = useIdentityContext();
     const style = {
@@ -16,6 +18,10 @@ export function Login() {
         border: "1px solid black",
         margin: "0.5rem",
         maxWidth: "8rem"
+    }
+
+    const handleDev = () => {
+        isDev.handleDev(true)
     }
 
 
@@ -116,6 +122,7 @@ export function Login() {
                     </form>
                 )}
             </Formik>
+            <Button onClick={() => handleDev()} sx={style} variant="outlined">Dev Login</Button>
         </Box>
     );
 }

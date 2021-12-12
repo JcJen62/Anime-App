@@ -12,6 +12,7 @@ const styles = {
 
 
 const MangaDetails = (props) => {
+  const isDev = useAnimeContext();
   const [MangaDetails, setMangaDetails] = useState();
   const context = useAnimeContext()
   const identity = useIdentityContext();
@@ -23,11 +24,11 @@ const MangaDetails = (props) => {
     getMangaDetails(context.id)
   }, [setMangaDetails, MangaDetails, context.id])
 
-  if (!identity.user) {
+  if (!identity.user && !isDev.isDev) {
     return <Redirect to={'/Login'} />;
-  }
+  } 
 
-  if (!identity.provisionalUser) {
+  if (!identity.provisionalUser && !isDev.isDev) {
     return <Redirect to={'/Dashboard'} />;
   }
 

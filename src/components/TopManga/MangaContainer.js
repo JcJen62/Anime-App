@@ -4,9 +4,11 @@ import { Grid, Typography } from "@mui/material";
 import { Redirect } from "react-router-dom";
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useAnimeContext } from "../../context/AnimeContext";
 
 
 const MangaContainer = () => {
+  const isDev = useAnimeContext();
   const identity = useIdentityContext();
   const [setOpen] = useState(false)
   const handleOpen = () => {
@@ -34,11 +36,11 @@ const MangaContainer = () => {
     fetchManga()
   }, [])
 
-  if (!identity.user) {
+  if (!identity.user && !isDev.isDev) {
     return <Redirect to={'/Login'} />;
   }
 
-  if (!identity.provisionalUser) {
+  if (!identity.provisionalUser && !isDev.isDev) {
     return <Redirect to={'/Dashboard'} />;
   }
 

@@ -12,6 +12,7 @@ const styles = {
 
 
 const AnimeDetails = (props) => {
+  const isDev = useAnimeContext();
   const [AnimeDetails, setAnimeDetails] = useState();
   const context = useAnimeContext()
   const identity = useIdentityContext();
@@ -24,11 +25,11 @@ const AnimeDetails = (props) => {
     getAnimeDetails(context.id)
   }, [setAnimeDetails, AnimeDetails, context.id])
 
-  if (!identity.user) {
+  if (!identity.user && !isDev.isDev) {
     return <Redirect to={'/Login'} />;
   }
 
-  if (!identity.provisionalUser) {
+  if (!identity.provisionalUser && !isDev.isDev) {
     return <Redirect to={'/Dashboard'} />;
   }
 
