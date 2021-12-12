@@ -1,4 +1,4 @@
-import { useIdentityContext } from 'react-netlify-identity-gotrue'
+import {useIdentityContext} from 'react-netlify-identity-gotrue';
 import React from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -78,11 +78,7 @@ export function Login() {
                     isSubmitting,
                     touched,
                 }) => (
-
-                    <form
-                        noValidate
-                        onSubmit={handleSubmit}
-                    >
+                    <form noValidate onSubmit={handleSubmit}>
                         <div>
                             <TextField
                                 error={Boolean(touched.email && errors.email)}
