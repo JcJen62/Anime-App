@@ -4,8 +4,9 @@ import {AnimeContextProvider} from "./context/AnimeContext";
 import GlobalStyles from "./components/GlobalStyles";
 import Navigation from "./components/Navigation";
 import { Route } from 'react-router-dom'
-import { Login, SignUp } from './components/Login/Login'
-import { Dashboard } from "./components/Login/Login";
+import { Login } from './components/Login/Login'
+import { SignUp } from "./components/Login/SignUp";
+import { Dashboard } from "./components/Login/Dashboard";
 import NetlifyIdentityContext from 'react-netlify-identity-gotrue'
 import AnimeContainer from './components/TopAnime/AnimeContainer'
 import MangaContainer from './components/TopManga/MangaContainer'

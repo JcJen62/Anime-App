@@ -4,25 +4,19 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router-dom';
-import { Typography } from '@mui/material';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useAnimeContext } from '../../context/AnimeContext';
 
-export function Login() {
-    const isDev = useAnimeContext();
-    const history = useHistory();
+export function SignUp() {
     const identity = useIdentityContext();
+    const [msg] = React.useState('');
     const style = {
         color: "black",
         border: "1px solid black",
         margin: "0.5rem",
         maxWidth: "8rem"
     }
-
-    const handleDev = () => {
-        isDev.handleDev(true)
-    }
+    const history = useHistory();
 
 
     return (
@@ -38,10 +32,15 @@ export function Login() {
         >
             <Formik
                 initialValues={{
-                    email: 'test@example.com',
+                    userName: 'Jon Doe',
+                    email: 'Test@gmail.com',
                     password: 'Password',
                 }}
                 validationSchema={Yup.object().shape({
+                    userName: Yup.string()
+                        .min(4, 'Must be at least 4 characters')
+                        .max(50, 'Must be less than 50 characters')
+                        .required('User name is required'),
                     email: Yup.string()
                         .email('Must be a valid email')
                         .max(255)
@@ -55,20 +54,22 @@ export function Login() {
                     try {
                         setStatus({ success: true })
                         setSubmitting(false)
-                        await identity.login({
-                            email: value.email,
-                            password: value.password
+                        console.log(value.email)
+                        await identity.signup({
+                            email: value.email, password: value.password, user_metadata: {
+                                full_name: value.userName
+                            }
                         }).then(() => {
+                            history.push('/Dashboard')
                             console.log('Successfully submitted!')
-                            history.push('/')
                         })
+
+
                     } catch (err) {
                         console.error(err)
                         setStatus({ success: false })
                         setErrors({ submit: err.message })
                         setSubmitting(false)
-                    } finally {
-                        history.push('/')
                     }
                 }}
             >
@@ -81,49 +82,65 @@ export function Login() {
                     isSubmitting,
                     touched,
                 }) => (
-                    <form noValidate onSubmit={handleSubmit}>
+
+                    <form
+                        noValidate
+                        onSubmit={handleSubmit}
+                    >
                         <div>
                             <TextField
-                                error={Boolean(touched.email && errors.email)}
-                                fullWidth
-                                helperText={touched.email && errors.email}
-                                label="Email Address"
-                                margin="normal"
-                                name="email"
+                                sx={{
+                                    margin: '0.8rem'
+                                }}
+                                className="inputLogin"
+                                error={Boolean(touched.userName && errors.userName)}
+                                helperText={touched.userName && errors.userName}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                type="email"
-                                variant="outlined"
-                                value={values.email}
-                                className="inputLogin"
+                                value={values.userName}
+                                name="userName"
+                                type="text"
+                                label="User Name"
                             />
                             <TextField
-                                error={Boolean(touched.password && errors.password)}
-                                fullWidth
-                                helperText={touched.password && errors.password}
-                                label="Password"
-                                margin="normal"
-                                name="password"
+                                sx={{
+                                    margin: '0.8rem'
+                                }}
+                                className="inputLogin"
+                                error={Boolean(touched.email && errors.email)}
+                                helperText={touched.email && errors.email}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                type="password"
-                                variant="outlined"
-                                value={values.password}
+                                value={values.email}
+                                name="email"
+                                type="email"
+                                label="Email Address"
+                            />
+                            <TextField
+                                sx={{
+                                    margin: '0.8rem'
+                                }}
                                 className="inputLogin"
+                                error={Boolean(touched.password && errors.password)}
+                                helperText={touched.password && errors.password}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.password}
+                                name="password"
+                                type="password"
+                                label="Password"
                             />
                         </div>
                         <div >
-                            <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Login</Button>
-
-                            <Typography variant='p'>Need to Sign Up?</Typography>
-                            <Button onClick={() => history.push('/SignUp')} sx={style}>Sign Up Here</Button>
+                            <Button disabled={isSubmitting} type="submit" sx={style} variant="outlined">Sign Up </Button>
+                            {msg && <pre>{msg}</pre>}
                         </div>
 
+
                     </form>
-                )}
-            </Formik>
-            <Button onClick={() => handleDev()} sx={style} variant="outlined">Dev Login</Button>
+                )
+                }
+            </Formik >
         </Box>
     );
 }
-

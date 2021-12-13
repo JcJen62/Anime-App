@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useIdentityContext } from 'react-netlify-identity-gotrue'
-import { Logout } from './Login/Login';
+import { Logout } from './Login/Logout'
 import { useHistory } from 'react-router-dom'
 
 
